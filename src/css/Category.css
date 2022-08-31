@@ -1,0 +1,20 @@
+.bg-image {
+    position: absolute;
+    top: 80px;
+    left: 16px;
+    z-index: -1;
+}
+
+#list-category-js {
+    max-height: 465px;
+    overflow-x: hidden;
+}
+
+#list-category-js::-webkit-scrollbar {
+    display: none;
+}
+
+.hero__text-title {
+    font-size: 2rem;
+    color: #fff;
+}
