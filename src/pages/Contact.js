@@ -1,7 +1,7 @@
 function Contact() {
     return (
         <>
-            <section className="breadcrumb-section set-bg" style={{backgroundImage: "url('https://www.kayak.com/rimg/himg/32/95/fc/expediav2-56606-1add01-084924.jpg?width=1366&height=768&crop=true')"}} >
+            <section className="breadcrumb-section set-bg mt-168" style={{backgroundImage: "url('https://www.kayak.com/rimg/himg/32/95/fc/expediav2-56606-1add01-084924.jpg?width=1366&height=768&crop=true')"}} >
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12 text-center">

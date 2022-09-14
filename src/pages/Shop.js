@@ -1,7 +1,10 @@
 import '../css/Category.css';
+import { useCart } from 'react-use-cart';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Shop() {
+    const { addItem } = useCart();
     const [showProducts, setShowProducts] = useState(true);
     const [listProducts, setListProduct ] = useState([]);
     const [listCategories, setListCategories] = useState([]);
@@ -28,12 +31,16 @@ export default function Shop() {
         setShowProducts(false)
     }
 
+    function currencyFormat(num) {
+        return num.toFixed(0).replace(/(\d)(?=(\d{03})+(?!\d))/g, '$1,') + 'đ'
+    }
+
     console.log(listProducts);
 
 
     return (
         <>
-            <section className="breadcrumb-section set-bg" style={{backgroundImage: "url('https://www.kayak.com/rimg/himg/32/95/fc/expediav2-56606-1add01-084924.jpg?width=1366&height=768&crop=true')"}} >
+            <section className="breadcrumb-section set-bg mt-168" style={{backgroundImage: "url('https://www.kayak.com/rimg/himg/32/95/fc/expediav2-56606-1add01-084924.jpg?width=1366&height=768&crop=true')"}} >
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12 text-center">
@@ -57,20 +64,20 @@ export default function Shop() {
                                 <div className="sidebar__item">
                                     <h4>Danh mục</h4>
                                     <ul id='list-category-js'>
-                                        { listCategories.map(item => (
-                                            <li key={item.idLSP} onClick={() => handleFilterCategory(item.idLSP)}><a>{item.tenLoai}</a></li>
+                                        { listCategories.map((item, index) => (
+                                            <li key={index} onClick={() => handleFilterCategory(item.idLSP)}><a href='#'>{item.tenLoai}</a></li>
                                         ))}
                                     </ul>
                                 </div> 
                                 
-                                <div className="sidebar__item">
+                                {/* <div className="sidebar__item">
                                     <h4>Giá</h4>
                                     <div className="price-range-wrap">
                                         <div className="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
                                             data-min="10" data-max="540">
                                             <div className="ui-slider-range ui-corner-all ui-widget-header"></div>
-                                            <span tabindex="0" className="ui-slider-handle ui-corner-all ui-state-default"></span>
-                                            <span tabindex="0" className="ui-slider-handle ui-corner-all ui-state-default"></span>
+                                            <span tabIndex="0" className="ui-slider-handle ui-corner-all ui-state-default"></span>
+                                            <span tabIndex="0" className="ui-slider-handle ui-corner-all ui-state-default"></span>
                                         </div>
                                         <div className="range-slider">
                                             <div className="price-input">
@@ -80,45 +87,6 @@ export default function Shop() {
                                         </div>
                                     </div>
                                 </div>
-                                {/* <div className="sidebar__item sidebar__item__color--option">
-                                    <h4>Màu sắc</h4>
-                                    <div className="sidebar__item__color sidebar__item__color--white">
-                                        <label htmlFor="white">
-                                            Trắng
-                                            <input type="radio" id="white" />
-                                        </label>
-                                    </div>
-                                    <div className="sidebar__item__color sidebar__item__color--gray">
-                                        <label htmlFor="gray">
-                                            Xám
-                                            <input type="radio" id="gray" />
-                                        </label>
-                                    </div>
-                                    <div className="sidebar__item__color sidebar__item__color--red">
-                                        <label htmlFor="red">
-                                            Đỏ
-                                            <input type="radio" id="red" />
-                                        </label>
-                                    </div>
-                                    <div className="sidebar__item__color sidebar__item__color--black">
-                                        <label htmlFor="black">
-                                            Đen
-                                            <input type="radio" id="black" />
-                                        </label>
-                                    </div>
-                                    <div className="sidebar__item__color sidebar__item__color--blue">
-                                        <label htmlFor="blue">
-                                            Xanh biển
-                                            <input type="radio" id="blue" />
-                                        </label>
-                                    </div>
-                                    <div className="sidebar__item__color sidebar__item__color--green">
-                                        <label htmlFor="green">
-                                            Xanh lá
-                                            <input type="radio" id="green" />
-                                        </label>
-                                    </div>
-                                </div> */}
                                 <div className="sidebar__item">
                                     <h4>Kích thước phổ biến</h4>
                                     <div className="sidebar__item__size">
@@ -139,7 +107,7 @@ export default function Shop() {
                                             <input type="radio" id="small" />
                                         </label>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                         <div className="col-lg-9 col-md-7">
@@ -153,12 +121,14 @@ export default function Shop() {
                                     <div className="col-lg-4 col-md-5">
                                         <div className="filter__sort">
                                             <span>Sắp xếp theo</span>
-                                            <select>
-                                                <option value="0">Giá từ thấp đến cao</option>
-                                                <option value="0">Giá từ cao đến thấp</option>
-                                                <option value="0">Phổ biến</option>
-                                                <option value="0">Xem nhiều nhất</option>
-                                            </select>
+                                            <span>
+                                                <select>
+                                                    <option value="0">Giá từ thấp đến cao</option>
+                                                    <option value="0">Giá từ cao đến thấp</option>
+                                                    <option value="0">Phổ biến</option>
+                                                    <option value="0">Xem nhiều nhất</option>
+                                                </select>
+                                            </span>
                                         </div>
                                     </div>
                                     <div className="col-lg-4 col-md-4">
@@ -166,54 +136,54 @@ export default function Shop() {
                                             { showResultSearch && <h6><span>{listProducts.length}</span> Sản phẩm được tìm thấy</h6> }
                                         </div>
                                     </div>
-                                    <div className="col-lg-4 col-md-3">
+                                    {/* <div className="col-lg-4 col-md-3">
                                         <div className="filter__option">
                                             <span className="icon_grid-2x2"></span>
                                             <span className="icon_ul"></span>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                             <div className="row">
                                 { showProducts && listProducts.map(item => (
-                                    <div className="col-lg-4 col-md-6 col-sm-6" key={item.idProd}>
-                                        <a href={item.idProd}>
+                                    <div className="col-lg-4 col-md-6 col-sm-6" key={item.id}>
+                                        <Link to={`/detail-product/${item.id}`}>
                                             <div className="product__item">
                                                 <div className="product__item__pic set-bg">
                                                     <img src={item.image} alt={item.image} />
                                                     <ul className="product__item__pic__hover">
                                                         <li><a href="#"><i className="fa fa-heart"></i></a></li>
                                                         <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                                        <li><a href="#"><i className="fa fa-shopping-cart"></i></a></li>
+                                                        <li onClick={() => addItem(item)}><a href={item.id}><i className="fa fa-shopping-cart"></i></a></li>
                                                     </ul>
                                                 </div>
                                                 <div className="product__item__text">
-                                                    <h6><a href="#">{item.tenSP}</a></h6>
-                                                    <h5>{item.price} đ</h5>
+                                                    <h6 className='name-product'><a href="#">{item.tenSP}</a></h6>
+                                                    <h5 className='price-product'>{currencyFormat(item.price)}</h5>
                                                 </div>
                                             </div>
-                                        </a>
+                                        </Link>
                                     </div>
                                 ))}
 
                                 { !showProducts && filterProduct.map(item => (
-                                    <div className="col-lg-4 col-md-6 col-sm-6" key={item.idProd}>
-                                        <a href={item.idProd}>
+                                    <div className="col-lg-4 col-md-6 col-sm-6" key={item.id}>
+                                        <Link to={`/detail-product/${item.id}`}>
                                             <div className="product__item">
                                                 <div className="product__item__pic set-bg">
                                                     <img src={item.image} alt={item.image} />
                                                     <ul className="product__item__pic__hover">
                                                         <li><a href="#"><i className="fa fa-heart"></i></a></li>
                                                         <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                                        <li><a href="#"><i className="fa fa-shopping-cart"></i></a></li>
+                                                        <li onClick={() => addItem(item)}><a href={item.id}><i className="fa fa-shopping-cart"></i></a></li>
                                                     </ul>
                                                 </div>
                                                 <div className="product__item__text">
-                                                    <h6><a href="#">{item.tenSP}</a></h6>
-                                                    <h5>{item.price} đ</h5>
+                                                    <h6 className='name-product'><a href="#">{item.tenSP}</a></h6>
+                                                    <h5 className='price-product'>{item.price && currencyFormat(item.price)}</h5>
                                                 </div>
                                             </div>
-                                        </a>
+                                        </Link>
                                     </div>
                                 ))}
                             </div>

@@ -1,4 +1,11 @@
+import { NavLink, Link } from "react-router-dom"
+import { useCart } from 'react-use-cart'
+
 export default function Header() {
+    const {
+        items,
+    } = useCart();
+    console.log(NavLink);
     return (
         <header className="header">
             <div className="header__top">
@@ -30,10 +37,10 @@ export default function Header() {
                                     </ul>
                                 </div> --> */}
                                 <div className="header__top__right__auth">
-                                    <a href="#" ><i className="fa fa-user"></i> Đăng ký</a>
+                                    <Link to="/register" ><i className="fa fa-user"></i> Đăng ký</Link>
                                 </div>
                                 <div className="header__top__right__auth">
-                                    <a href="#" ><i className="fa fa-user"></i> Đăng nhập</a>
+                                    <Link to="/login" ><i className="fa fa-user"></i> Đăng nhập</Link>
                                 </div>
                             </div>
                         </div>
@@ -44,25 +51,25 @@ export default function Header() {
                 <div className="row">
                     <div className="col-lg-3">
                         <div className="header__logo">
-                            <a href="#"><img src="../../assets/img/main-logo.png" alt=""/></a>
+                            <Link to="/"><img src="../../assets/img/main-logo.png" alt=""/></Link>
                         </div>
                     </div>
                     <div className="col-lg-6">
                         <nav className="header__menu">
-                            <ul>
-                                <li className="active"><a href="" >Trang chủ</a></li>
-                                <li><a href="#" >Sản phẩm</a></li>
-                                <li><a href="#" >Bài viết</a></li>
-                                <li><a href="#" >Liên hệ</a></li>
-                                <li><a href="#" >Giỏ hàng</a></li>
+                            <ul id="menu">
+                                <li><NavLink exact to="/" >Trang chủ</NavLink></li>
+                                <li><NavLink to="/shop">Sản phẩm</NavLink></li>
+                                <li><NavLink to="/blog" >Bài viết</NavLink></li>
+                                <li><NavLink to="/contact">Liên hệ</NavLink></li>
+                                <li><NavLink to="/cart">Giỏ hàng</NavLink></li>
                             </ul>
                         </nav>
                     </div>
                     <div className="col-lg-3">
                         <div className="header__cart">
                             <ul>
-                                <li><a href="#"><i className="fa fa-heart"></i> <span>1</span></a></li>
-                                <li><a href="#" ><i className="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                                <li><a href="#"><i className="fa fa-heart"></i> <span>0</span></a></li>
+                                <li><Link to="/cart" ><i className="fa fa-shopping-bag"></i> <span>{items.length}</span></Link></li>
                             </ul>
                             {/* <div className="header__cart__price">item: <span>$150.00</span></div> */}
                         </div>

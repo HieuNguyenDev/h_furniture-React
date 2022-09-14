@@ -5,7 +5,7 @@ export default function Footer() {
         <footer className="footer spad">
             <div className="container">
                 <div className="row">
-                    <div className="col-lg-3 col-md-6 col-sm-6">
+                    <div className="col-lg-4 col-md-6 col-sm-6">
                         <div className="footer__about">
                             <div className="footer__about__logo">
                                 <a href="#"><img src="../../assets/img/main-logo.png" alt="" /></a>
@@ -17,7 +17,7 @@ export default function Footer() {
                             </ul>
                         </div>
                     </div>
-                    <div className="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+                    <div className="col-lg-4 col-md-6 col-sm-6">
                         <div className="footer__widget">
                             <ul>
                                 <li><a href="#">Về chúng tôi</a></li>
