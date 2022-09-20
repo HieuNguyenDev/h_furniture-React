@@ -1,7 +1,31 @@
-import { useCart } from 'react-use-cart'
-import { useState, useEffect } from 'react'
-import Slider from 'react-slick'
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Slider from "react-slick";
+import { useCart } from 'react-use-cart';
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+
+function SampleNextArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{ ...style, display: "block", background: "#ccc" }}
+        onClick={onClick}
+      />
+    );
+  }
+  
+  function SamplePrevArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{ ...style, display: "block", background: "#ccc" }}
+        onClick={onClick}
+      />
+    );
+  }
 
 export default function Product() {
     const { addItem } = useCart();
@@ -10,14 +34,42 @@ export default function Product() {
     const [listCategories, setListCategories] = useState([]);
     const [filterProduct, setFilterProduct] = useState([]);
 
-    const settings = {
+    var settings = {
         dots: true,
         infinite: true,
         speed: 500,
         slidesToShow: 1,
-        slidesToScroll: 1
+        slidesToScroll: 1,
+        initialSlide: 0,
+        nextArrow: <SampleNextArrow />,
+        prevArrow: <SamplePrevArrow />,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 3,
+              infinite: true,
+              dots: true
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2,
+              initialSlide: 2
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+        ]
       };
-
     useEffect(() => {
         fetch(`https://demo.trungthanhweb.com/api/sp`)
             .then(res => res.json())
@@ -40,7 +92,7 @@ export default function Product() {
 
     function currencyFormat(num) {
         return num.toFixed(0).replace(/(\d)(?=(\d{03})+(?!\d))/g, '$1,') + 'đ'
-     }
+    }
 
     return (
         <>  
@@ -66,36 +118,34 @@ export default function Product() {
                             <div className="hero__search">
                                 <div className="hero__search__form">
                                     <form action="#">
-                                        {/* <!-- <div className="hero__search__categories">
-                                            Tất cả loại 
-                                            <span className="arrow_carrot-down"></span>
-                                        </div> --> */}
                                         <input type="text" placeholder="Tìm sản phẩm, danh mục hay thương hiệu mong muốn..." />
                                         <button type="submit" className="site-btn">Tìm kiếm</button>
                                     </form>
                                 </div>
                             </div>
-
-                                        {/* Slider */}
-                            <div className="hero__item set-bg main-bg" style={{backgroundImage: "url('https://cdn.pixabay.com/photo/2016/11/18/14/05/brick-wall-1834784_960_720.jpg')"}}> </div>
         
-                            <div className='main-bg'>
-                                {/* <Slider {...settings}>
-                                    <div>
-                                        <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="" />
-                                    </div>
-                                    <div>
-                                        <img src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="" />
-                                    </div>
-                                    <div>
-                                        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80" alt="" />
-                                    </div>
-                                </Slider>   */}
-                                <div className="hero__text">
+                            <div className=''>
+                                
+                                {/* <div className="hero__text">
                                     <h2 className="hero__text-title">Bộ sưu tập phòng khách</h2>
                                     <a href="#" className="primary-btn hero__link-title">Khám phá ngay</a>
-                                </div>
+                                </div> */}
                             </div>
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div className='col-lg-12'>
+                            <Slider {...settings}>
+                                <div>
+                                    <img className='image' src="https://fastcdn.pro/FileGallery/sermehiranian.com/Posts/3360_SL%20CR.jpg" alt="" />
+                                </div>
+                                <div>
+                                    <img className='image' src="https://fastcdn.pro/FileGallery/sermehiranian.com/Posts/3360_SL%20CR.jpg" alt="" />
+                                </div>
+                                <div>
+                                    <img className='image' src="https://fastcdn.pro/FileGallery/sermehiranian.com/Posts/3360_SL%20CR.jpg" alt="" />
+                                </div>
+                            </Slider>  
                         </div>
                     </div>
                 </div>
