@@ -1,7 +1,9 @@
-import '../css/Category.css';
-import { useCart } from 'react-use-cart';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useCart } from 'react-use-cart';
+import '../css/Category.css';
+import '../css/Products.css';
+import '../css/Shop.css';
 
 export default function Shop() {
     const { addItem } = useCart();
@@ -10,6 +12,9 @@ export default function Shop() {
     const [listCategories, setListCategories] = useState([]);
     const [filterProduct, setFilterProduct] = useState([]);
     const [showResultSearch, setShowResultSearch] = useState(false);
+    const [showCategories, setShowCategories] = useState(false)
+    const [searchQuerry, setSearchQuerry] = useState('');
+    const [sortValue, setSortValue] = useState(0)
 
     useEffect(() => {
         fetch(`https://demo.trungthanhweb.com/api/sp`)
@@ -23,6 +28,12 @@ export default function Shop() {
             .then(data => setListCategories(data))
     }, []);
 
+    const handleSort = () => {
+        listProducts.sort((item1, item2) => {
+            return item1.price - item2.price
+        })
+    }
+
     const handleFilterCategory = (id) => {
         let filterProduct = listProducts.filter(item => {
             return item.idLSP === id;
@@ -35,12 +46,16 @@ export default function Shop() {
         return num.toFixed(0).replace(/(\d)(?=(\d{03})+(?!\d))/g, '$1,') + 'đ'
     }
 
-    console.log(listProducts);
+    function handleSearch(e) {
+        setSearchQuerry(e.target.value)
+    }
+
+    
 
 
     return (
         <>
-            <section className="breadcrumb-section set-bg mt-168" style={{backgroundImage: "url('https://www.kayak.com/rimg/himg/32/95/fc/expediav2-56606-1add01-084924.jpg?width=1366&height=768&crop=true')"}} >
+            {/* <section className="breadcrumb-section set-bg mt-168" style={{backgroundImage: "url('https://www.kayak.com/rimg/himg/32/95/fc/expediav2-56606-1add01-084924.jpg?width=1366&height=768&crop=true')"}} >
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12 text-center">
@@ -54,99 +69,93 @@ export default function Shop() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             <section className="product spad">
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-3 col-md-5">
-                            <div className="sidebar">
-                                <div className="sidebar__item">
-                                    <h4>Danh mục</h4>
-                                    <ul id='list-category-js'>
-                                        { listCategories.map((item, index) => (
-                                            <li key={index} onClick={() => handleFilterCategory(item.idLSP)}><a href='#'>{item.tenLoai}</a></li>
-                                        ))}
-                                    </ul>
-                                </div> 
-                                
-                                {/* <div className="sidebar__item">
-                                    <h4>Giá</h4>
-                                    <div className="price-range-wrap">
-                                        <div className="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                            data-min="10" data-max="540">
-                                            <div className="ui-slider-range ui-corner-all ui-widget-header"></div>
-                                            <span tabIndex="0" className="ui-slider-handle ui-corner-all ui-state-default"></span>
-                                            <span tabIndex="0" className="ui-slider-handle ui-corner-all ui-state-default"></span>
-                                        </div>
-                                        <div className="range-slider">
-                                            <div className="price-input">
-                                                <input type="text" id="minamount" />
-                                                <input type="text" id="maxamount" />
+                        <div className="col-lg-12 col-md-7">
+                            <div className='row box-filter'>
+                                {/* <div className="filter__item filter-container"> */}
+                                    <div className="col-lg-4 col-md-7">
+                                        <div className="hero__categories">
+                                            <div className="hero__categories__all">
+                                                <span>Danh mục</span>
+                                                <i className="fa fa-bars" onClick={() => setShowCategories(!showCategories)}></i>
+                                            </div>
+                                            {showCategories && (
+                                                <ul id='list-category-js'>
+                                                { listCategories.map((item, index) => (
+                                                    <li key={index} onClick={() => handleFilterCategory(item.idLSP)}><a href='#'>{item.tenLoai}</a></li>
+                                                ))}
+                                                </ul>
+                                            )}   
+                                        </div> 
+                                    </div>
+                                    <div className="col-lg-4 col-md-7">
+                                        <div className="filter__sort">
+                                            <div className='dropdown'>
+                                                <div className="dropdown-select">
+                                                    <span className='select'>Sắp xếp theo</span>
+                                                    <i class="icon fa fa-thin fa-caret-down"></i>
+                                                </div>
+                                                <div className='dropdown-list'>
+                                                    <li className='dropdown-list__item' onClick={() => setSortValue(1)}>Giá từ thấp đến cao</li>
+                                                    <li className='dropdown-list__item' onClick={() => setSortValue(2)}>Giá từ cao đến thấp</li>
+                                                    <li className='dropdown-list__item' onClick={() => setSortValue(3)}>Xem nhiều nhất</li>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="sidebar__item">
-                                    <h4>Kích thước phổ biến</h4>
-                                    <div className="sidebar__item__size">
-                                        <label htmlFor="large">
-                                            Lớn
-                                            <input type="radio" id="large" />
-                                        </label>
+                                    <div className="col-lg-4 col-md-7">
+                                        <div className="hero__search__form form-container">
+                                            <form action="#">
+                                                <input type="text" placeholder="Tìm sản phẩm..." onChange={handleSearch} /> 
+                                                <i class="fa fa-search search-icon"></i>
+                                            </form>
+                                        </div>
                                     </div>
-                                    <div className="sidebar__item__size">
-                                        <label htmlFor="medium">
-                                            Trung bình
-                                            <input type="radio" id="medium" />
-                                        </label>
-                                    </div>
-                                    <div className="sidebar__item__size">
-                                        <label htmlFor="small">
-                                            Nhỏ
-                                            <input type="radio" id="small" />
-                                        </label>
-                                    </div>
-                                </div> */}
+                                {/* </div> */}
                             </div>
-                        </div>
-                        <div className="col-lg-9 col-md-7">
-                            <div className="product__discount">
-                                {/* <div className="section-title product__discount__title">
-                                    <h2>Sản phẩm</h2>
-                                </div> */}
-                            </div>
-                            <div className="filter__item">
-                                <div className="row">
-                                    <div className="col-lg-4 col-md-5">
-                                        <div className="filter__sort">
-                                            <span>Sắp xếp theo</span>
-                                            <span>
-                                                <select>
-                                                    <option value="0">Giá từ thấp đến cao</option>
-                                                    <option value="0">Giá từ cao đến thấp</option>
-                                                    <option value="0">Phổ biến</option>
-                                                    <option value="0">Xem nhiều nhất</option>
-                                                </select>
-                                            </span>
-                                        </div>
+                            <div className="row" style={{marginTop: '160px'}}>
+                                <div className="col-lg-12">
+                                    <div className="section-title">
+                                        <h2>Tất cả sản phẩm</h2>
                                     </div>
-                                    <div className="col-lg-4 col-md-4">
-                                        <div className="filter__found">
-                                            { showResultSearch && <h6><span>{listProducts.length}</span> Sản phẩm được tìm thấy</h6> }
-                                        </div>
-                                    </div>
-                                    {/* <div className="col-lg-4 col-md-3">
-                                        <div className="filter__option">
-                                            <span className="icon_grid-2x2"></span>
-                                            <span className="icon_ul"></span>
-                                        </div>
+                                    {/* <div className="featured__controls">
+                                        <ul>
+                                            <li className="active" data-filter="*">Tất cả</li>
+                                            <li data-filter=".oranges">Oranges</li>
+                                            <li data-filter=".fresh-meat">Fresh Meat</li>
+                                            <li data-filter=".vegetables">Vegetables</li>
+                                            <li data-filter=".fastfood">Fastfood</li>
+                                        </ul>
                                     </div> */}
                                 </div>
                             </div>
+                            <div className='row'>
+                                <div className='col-lg-12'>
+                                    <div className="filter__found">
+                                        { showResultSearch && <h6><span>{listProducts.length}</span> Sản phẩm được tìm thấy</h6> }
+                                    </div>
+                                </div>
+                            </div>
                             <div className="row">
-                                { showProducts && listProducts.map(item => (
-                                    <div className="col-lg-4 col-md-6 col-sm-6" key={item.id}>
+                                { showProducts && listProducts.sort((item1, item2) => {
+                                    if (sortValue === 1) {
+                                        return item1.price - item2.price;
+                                    } else if (sortValue === 2) {
+                                        return item2.price - item1.price;
+                                    } else if (sortValue === 3) {
+                                        return item2.soLuotXem - item1.soLuotXem
+                                    }
+                                }).filter(value => {
+                                    if(searchQuerry == '') {
+                                        return value
+                                    } else if (value.tenSP.toLowerCase().includes(searchQuerry.toLowerCase())) {
+                                        return value
+                                    }}).map(item => (
+                                    <div className="col-lg-3 col-md-6 col-sm-6" key={item.id}>
                                         <Link to={`/detail-product/${item.id}`}>
                                             <div className="product__item">
                                                 <div className="product__item__pic set-bg">
@@ -159,6 +168,7 @@ export default function Shop() {
                                                 </div>
                                                 <div className="product__item__text">
                                                     <h6 className='name-product'><a href="#">{item.tenSP}</a></h6>
+                                                    <p>Lượt xem: {item.soLuotXem}</p>
                                                     <h5 className='price-product'>{currencyFormat(item.price)}</h5>
                                                 </div>
                                             </div>
@@ -180,6 +190,7 @@ export default function Shop() {
                                                 </div>
                                                 <div className="product__item__text">
                                                     <h6 className='name-product'><a href="#">{item.tenSP}</a></h6>
+                                                    <p>Lượt xem: {item.soLuotXem}</p>
                                                     <h5 className='price-product'>{item.price && currencyFormat(item.price)}</h5>
                                                 </div>
                                             </div>

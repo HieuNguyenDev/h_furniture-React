@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { useCart } from 'react-use-cart';
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useCart } from 'react-use-cart';
 
 function DetailProduct() {
   const { addItem } = useCart();
@@ -84,6 +84,9 @@ function DetailProduct() {
                 <ul>
                   <li>
                     <b>Trạng thái</b> <span>Còn hàng</span>
+                  </li>
+                  <li>
+                    <b>Lượt xem</b> <span>{product.soLuotXem}</span>
                   </li>
                   {/* <!-- <li><b>Vận chuyển</b> <span>3 ngày. <samp>Miễn phí vận chuyển hôm nay</samp></span></li> --> */}
                   <li>

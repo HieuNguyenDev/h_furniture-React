@@ -1,11 +1,11 @@
-import { NavLink, Link } from "react-router-dom"
-import { useCart } from 'react-use-cart'
+import { Link, NavLink } from "react-router-dom";
+import { useCart } from 'react-use-cart';
 
 export default function Header() {
     const {
         items,
     } = useCart();
-    console.log(NavLink);
+    
     return (
         <header className="header">
             <div className="header__top">

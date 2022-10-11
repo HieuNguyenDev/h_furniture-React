@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useCart } from 'react-use-cart'
+import { useEffect, useState } from 'react';
+import { useCart } from 'react-use-cart';
 
 function Checkout() {
     const [listProvinces, setListProvinces] = useState([])
@@ -90,7 +90,7 @@ function Checkout() {
                                     <div className="checkout__input">
                                         <p>Ghi chú<span>*</span></p>
                                         <input type="text"
-                                            placeholder="Bạn muốn chọn thời gian giao hàng phù hợp ? Hãy để lại thông tin tại đây cho chúng tôi !" />
+                                            placeholder="Ghi chú..." />
                                     </div>
                                 </div>
                                 <div className="col-lg-7 col-md-7">

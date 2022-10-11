@@ -6,7 +6,8 @@
 }
 
 #list-category-js {
-    max-height: 465px;
+    min-width: 360px;
+    background-color: #fff;
     overflow-x: hidden;
 }
 
@@ -17,4 +18,19 @@
 .hero__text-title {
     font-size: 2rem;
     color: #fff;
+}
+
+.hero__categories {
+    /* width: 262px !important; */
+}
+
+.product {
+    text-align: left;
+    /* width: 1177px; */
+}
+
+.filter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
