@@ -1,39 +1,40 @@
-import '../css/login.css'
-import { useState } from 'react'
-import axios from 'axios'
+import { useEffect, useState } from 'react';
+import FacebookLogin from 'react-facebook-login';
+import '../css/login.css';
 
 function Login() {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [users, setUsers] = useState([])
+    const [user, setUser] = useState({
+        isLoggedIn: false,
+        userID: '',
+        name: '',
+        email: '',
+        picture: ''
+    })
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const user = {
-            email,
-            password
-        }
-
-        axios.get('http://localhost:3000/users')
-            .then(function (response) {
-                setUsers(response.data);
-            })
-            .catch(function (error) {
-                alert('Lỗi!')
-                console.log(error);
-            });
-
-        checkLogin()
+    const responseFacebook = (response) => {
+        console.log(response);
+        setUser({
+            isLoggedIn: true,
+            userID: response.userID,
+            name: response.name,
+            email: response.email,
+            picture: response.picture.data.url
+        })
     }
 
-    const checkLogin = () => {
-        const userExactly = users.filter(user => user.email === email && user.password === password)
-        console.log(userExactly);
-        if (userExactly.length > 0) {
-            alert('Đăng nhập thành công!')
-        } else {
-            alert('Email hoặc password không chính xác!')
-        }
+    useEffect(() => {
+        saveToLocalStorage()
+    }, [user])
+
+    
+
+    const componentClicked = (data) => {
+        console.log(data)
+    }
+    
+    const saveToLocalStorage = () => {
+        const jsonUser = JSON.stringify(user)
+        localStorage.setItem('user', jsonUser)
     }
 
     return (
@@ -42,29 +43,20 @@ function Login() {
                 <div className="container">
                     <div className="checkout__form">
                         <h4>Đăng nhập</h4>
-                        <form className="form-container" action="#">
-                            <div className="row">
-                                <div className="col-lg-12 col-md-6">
-                                    <div className="checkout__input">
-                                        {/* <p>Email<span>*</span></p> */}
-                                        <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
-                                    </div>
-                                    <div className="checkout__input">
-                                        {/* <p>Mật khẩu<span>*</span></p> */}
-                                        <input type="password" placeholder="Mật khẩu" onChange={(e) => setPassword(e.target.value)}/>
-                                    </div>
-                                    
-                                    <div className="col-lg-6">
-                                        <div className="checkout__input">
-                                            <button className="btn primary-btn" onClick={handleSubmit}>Đăng nhập</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                {/* <div className="col-lg-6 col-md-6">
-                                    <img src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-135.jpg?w=2000" alt="" />
-                                </div> */}
+                        {user.isLoggedIn ? (
+                            <div>
+                                <p>{user.name}</p>
+                                <img style={{width: 100, height: 100}} src={user.picture} alt="not image" />
                             </div>
-                        </form>
+                        ) : (
+                            
+                            <FacebookLogin
+                            appId="2435225616776152"
+                            autoLoad={true}
+                            fields="name,email,picture"
+                            onClick={componentClicked}
+                            callback={responseFacebook} />
+                        )}
                     </div>
                 </div>
             </section>

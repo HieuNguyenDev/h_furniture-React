@@ -1,0 +1,30 @@
+.user-content {
+    position: relative;
+    cursor: pointer;
+}
+
+.user-actions {
+    position: absolute;
+    top: 38px;
+    left: 0;
+    background-color: #fff;
+    min-height: 100px;
+    min-width: 160px;
+    list-style: none;
+    z-index: 1;
+    box-shadow: 0 0 14px rgba(0, 0, 0, 0.1);
+}
+
+.user-actions > li {
+    font-size: 14px;
+    padding: 12px;
+    text-align: left;
+}
+
+.user-actions > li:hover {
+    color: #d1903b;
+}
+
+.user-actions > li > i {
+    margin-right: 8px;
+}

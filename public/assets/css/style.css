@@ -455,6 +455,7 @@ ol {
 }
 
 .header__logo {
+	text-align: left;
 	padding: 15px 0;
 }
 

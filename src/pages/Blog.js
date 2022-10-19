@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import Moment from 'moment'
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 function Blog() {
     const [posts, setPosts] = useState([])
@@ -9,6 +9,8 @@ function Blog() {
             .then(res => res.json())
             .then(data => setPosts(data))
     }, [])
+
+    console.log(posts);
     return (
         <>
             <section className="from-blog spad mt-116">
