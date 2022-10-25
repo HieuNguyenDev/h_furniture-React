@@ -1,14 +1,17 @@
-import Home from '../pages/Home';
-import Shop from '../pages/Shop';
 import Blog from '../pages/Blog';
-import Contact from '../pages/Contact';
-import Cart from '../pages/Cart';
-import Register from '../pages/Register';
-import Login from '../pages/Login';
-import Checkout from '../pages/Checkout';
-import ProductDetail from '../pages/ProductDetail';
 import BlogDetail from '../pages/BlogDetail';
+import Cart from '../pages/Cart';
+import Checkout from '../pages/Checkout';
+import Contact from '../pages/Contact';
+import Home from '../pages/Home';
+import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
+import ProductDetail from '../pages/ProductDetail';
+import Register from '../pages/Register';
+import Shop from '../pages/Shop';
+
+// Test
+import Test from '../components/Test';
 
 // Public Routes
 export const publicRoutes = [
@@ -24,6 +27,7 @@ export const publicRoutes = [
     { path: '/checkout', component: Checkout },
     { path: '/detail-product/:id', component: ProductDetail },
     { path: '/blog/:id', component: BlogDetail },
+    { path: '/test', component: Test },
 ]
 
 export const privateRoutes = [

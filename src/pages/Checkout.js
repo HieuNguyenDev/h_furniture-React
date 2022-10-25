@@ -37,12 +37,13 @@ function Checkout() {
                                 <div className="col-lg-5 col-md-5">
                                     <div className="checkout__input">
                                         <p>Họ và tên<span>*</span></p>
-                                        <input type="text" />
+                                        <input type="text" placeholder='Nguyễn Văn A'/>
                                     </div>
                                     <div className="checkout__input">
                                         <p>Địa chỉ<span>*</span></p>
-                                        <input type="text" placeholder="Street Address" className="checkout__input__add" />
+                                        <input type="text" placeholder="HCM - VN" className="checkout__input__add" />
                                     </div>
+
                                     <div className="checkout__input">
                                         <select name="" id="">
                                             <option value="null">Chọn tỉnh / thành</option>
@@ -57,13 +58,13 @@ function Checkout() {
                                         <div className="col-lg-6">
                                             <div className="checkout__input">
                                                 <p>Email<span>*</span></p>
-                                                <input type="email" />
+                                                <input type="email" placeholder='contact@example.com'/>
                                             </div>
                                         </div>
                                         <div className="col-lg-6">
                                             <div className="checkout__input">
                                                 <p>Số điện thoại<span>*</span></p>
-                                                <input type="number" />
+                                                <input type="number" placeholder='0123456789' />
                                             </div>
                                         </div>
                                     </div>
@@ -90,7 +91,7 @@ function Checkout() {
                                     <div className="checkout__input">
                                         <p>Ghi chú<span>*</span></p>
                                         <input type="text"
-                                            placeholder="Ghi chú..." />
+                                            placeholder="Yêu cầu của bạn..." />
                                     </div>
                                 </div>
                                 <div className="col-lg-7 col-md-7">
@@ -111,31 +112,14 @@ function Checkout() {
                                                 </li>
                                             ))}
                                         </ul>
-                                        {/* <div className="checkout__order__subtotal">Tổng phụ <span>$750.99</span></div> */}
-                                        <div className="checkout__order__total">Tổng cộng <span>{currencyFormat(cartTotal)}</span></div>
-                                        {/* <!-- <div className="checkout__input__checkbox">
-                                            <label for="acc-or">
-                                                Create an account?
-                                                <input type="checkbox" id="acc-or">
-                                                <span className="checkmark"></span>
-                                            </label>
-                                        </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do eiusmod tempor incididunt
-                                            ut labore et dolore magna aliqua.</p>
                                         <div className="checkout__input__checkbox">
-                                            <label for="payment">
-                                                Check Payment
-                                                <input type="checkbox" id="payment">
-                                                <span className="checkmark"></span>
-                                            </label>
+                                            <h4>Phương thức thanh toán</h4>
+                                            <ul className='checkout-option-list'>
+                                                <li><button className='checkout-btn-option'>Thanh toán khi nhận hàng</button> </li>
+                                                <li><button className='checkout-btn-option'>Ví Momo</button> </li>
+                                                <li><button className='checkout-btn-option'>VNPay</button> </li>
+                                            </ul>
                                         </div>
-                                        <div className="checkout__input__checkbox">
-                                            <label for="paypal">
-                                                Paypal
-                                                <input type="checkbox" id="paypal">
-                                                <span className="checkmark"></span>
-                                            </label>
-                                        </div> --> */}
                                         <button type="submit" className="site-btn">Đặt hàng</button>
                                     </div>
                                 </div>

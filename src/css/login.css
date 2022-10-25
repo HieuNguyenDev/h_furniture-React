@@ -1,0 +1,30 @@
+@keyframes showModalLogin {
+    0% {
+        margin-top: -100px;
+        opacity: 0;
+    }
+    100% {
+        margin-top: 0;
+        opacity: 1;
+    }
+}
+
+.login-success-modal {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    background-color: #f3f3f34a;
+    border-radius: 14px;
+    animation: showModalLogin 0.5s ease-in;
+    z-index: 1;
+}
+
+.login-icon  {
+    margin-left: 14px;
+    color: #71be34;
+    border: 1px solid #71be34;
+    border-radius: 50%;
+    padding: 8px;
+}

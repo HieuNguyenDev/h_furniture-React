@@ -3573,3 +3573,26 @@ ol {
 		font-size: 24px;
 	}
 }
+
+/* checkout */
+.checkout-option-list {
+	margin: 40px 0;
+	display: flex;
+	justify-content: space-between;
+}
+
+.checkout-btn-option {
+	font-style: 16px;
+	padding: 6px;
+	border: 1px solid #d1903b;
+	color: #d1903b;
+}
+
+.checkout-btn-option:hover, .checkout-btn-option:focus {
+	color: #fff;
+	background-color: #d1903b;
+}
+
+.site-btn {
+	margin-top: 30px !important;
+}

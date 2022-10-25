@@ -27,23 +27,13 @@ export default function Header() {
     }, 100)
     
     const [showMenu, setShowMenu] = useState(true);
-    
 
-    // useEffect(() => {
-    //     const handleScroll = () => {
-    //         if (window.scrollY >= 200) {
-    //             setShowMenu(false)
-    //         } else {
-    //             setShowMenu(true)
-    //         }
-    //     }
-        
-    //     window.addEventListener('scroll', handleScroll)
-
-    // }, [])
+    const handleLogout = () => {
+        logout()
+    }
     
     return (
-        <header className="header">
+        <header className="header"> 
             <div className="header__top">
                 <div className="container">
                     <div className="row">
@@ -66,13 +56,13 @@ export default function Header() {
                                 <div className="header__top__right__auth">
                                     { user.isLoggedIn ? (
                                         <div className='user-content'>
-                                            <div onClick={() => setShowLogoutButton(true)}>
+                                            <div onClick={() => setShowLogoutButton(!showLogoutButton)}>
                                                 <img style={{height: 20}} src={user.picture} alt="" />
                                                 <span style={{marginLeft: '8px', fontSize: '12px'}}>{user.name}</span>
                                             </div>
                                             {showLogoutButton && (
                                                 <ul className='user-actions'>
-                                                    <li onClick={() => logout()}><i className="fa fa-sign-out"></i>Đăng xuất</li>
+                                                    <li onClick={() => handleLogout()}><i className="fa fa-sign-out"></i>Đăng xuất</li>
                                                 </ul>
                                             )}
                                         </div>

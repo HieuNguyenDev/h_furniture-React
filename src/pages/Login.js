@@ -44,9 +44,10 @@ function Login() {
                     <div className="checkout__form">
                         <h4>Đăng nhập</h4>
                         {user.isLoggedIn ? (
-                            <div>
-                                <p>{user.name}</p>
-                                <img style={{width: 100, height: 100}} src={user.picture} alt="not image" />
+                            <div className='login-success-modal'>
+                                {/* <p>{user.name}</p>
+                                <img style={{width: 100, height: 100}} src={user.picture} alt="not image" /> */}
+                                <h3>Đăng nhập thành công!<i class="login-icon fa-solid fa-check"></i></h3>
                             </div>
                         ) : (
                             

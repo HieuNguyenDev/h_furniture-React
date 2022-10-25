@@ -14,7 +14,6 @@ export default function Product() {
     const [filterProduct, setFilterProduct] = useState([]);
     const [showCategory, setShowCategory] = useState(false);
     const [searchQuerry, setSearchQuerry] = useState('');
-    
 
     var settings = {
         dots: true,
@@ -125,7 +124,6 @@ export default function Product() {
                             </div>
         
                             <div className=''>
-                                
                                 {/* <div className="hero__text">
                                     <h2 className="hero__text-title">Bộ sưu tập phòng khách</h2>
                                     <a href="#" className="primary-btn hero__link-title">Khám phá ngay</a>
@@ -159,19 +157,10 @@ export default function Product() {
                                 <div className="section-title">
                                     <h2>Kết quả tìm kiếm</h2>
                                 </div>
-                                {/* <div className="featured__controls">
-                                    <ul>
-                                        <li className="active" data-filter="*">Tất cả</li>
-                                        <li data-filter=".oranges">Oranges</li>
-                                        <li data-filter=".fresh-meat">Fresh Meat</li>
-                                        <li data-filter=".vegetables">Vegetables</li>
-                                        <li data-filter=".fastfood">Fastfood</li>
-                                    </ul>
-                                </div> */}
                             </div>
                         </div>
                         <div className="row featured__filter" >
-                            { listProducts.filter(value => {
+                            {listProducts.filter(value => {
                                 if(searchQuerry == '') {
                                     return value
                                 } else if (value.tenSP.toLowerCase().includes(searchQuerry.toLowerCase())) {
@@ -185,7 +174,7 @@ export default function Product() {
                                                 <ul className="featured__item__pic__hover">
                                                     <li><a href="#"><i className="fa fa-heart"></i></a></li>
                                                     <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                                    <li onClick={() => addItem(item)}><a href={item.id}><i className="fa fa-shopping-cart"></i></a></li>
+                                                    <li onClick={() => addItem(item)}><Link to="/cart"><i className="fa fa-shopping-cart"></i></Link></li>
                                                 </ul>
                                             </div>
                                             <div className="featured__item__text">
@@ -212,7 +201,9 @@ export default function Product() {
                         </div>
                     </div>
                     <div className="row featured__filter" >
-                        { showProducts && listProducts.filter(sp => {
+                        { showProducts && listProducts.sort((item1, item2) => {
+                            return item2.soLuotXem - item1.soLuotXem;
+                        }).filter(sp => {
                             return sp.soLuotXem > 20
                         }).map(item => (
                             <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat" >
@@ -223,7 +214,7 @@ export default function Product() {
                                             <ul className="featured__item__pic__hover">
                                                 <li><a href="#"><i className="fa fa-heart"></i></a></li>
                                                 <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                                <li onClick={() => addItem(item)}><a href={item.id}><i className="fa fa-shopping-cart"></i></a></li>
+                                                <li onClick={() => addItem(item)}><Link to="/cart"><i className="fa fa-shopping-cart"></i></Link></li>
                                             </ul>
                                         </div>
                                         <div className="featured__item__text">
@@ -245,7 +236,7 @@ export default function Product() {
                                             <ul className="featured__item__pic__hover">
                                                 <li><a href="#"><i className="fa fa-heart"></i></a></li>
                                                 <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                                <li onClick={() => addItem(item)}><a href={item.id}><i className="fa fa-shopping-cart"></i></a></li>
+                                                <li onClick={() => addItem(item)}><Link to="/cart"><i className="fa fa-shopping-cart"></i></Link></li>
                                             </ul>
                                         </div>
                                         <div className="featured__item__text">
@@ -289,7 +280,7 @@ export default function Product() {
                                             <ul className="featured__item__pic__hover">
                                                 <li><a href="#"><i className="fa fa-heart"></i></a></li>
                                                 <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                                <li onClick={() => addItem(item)}><a href={item.id}><i className="fa fa-shopping-cart"></i></a></li>
+                                                <li onClick={() => addItem(item)}><Link to="/cart"><i className="fa fa-shopping-cart"></i></Link></li>
                                             </ul>
                                         </div>
                                         <div className="featured__item__text">
@@ -311,7 +302,7 @@ export default function Product() {
                                             <ul className="featured__item__pic__hover">
                                                 <li><a href="#"><i className="fa fa-heart"></i></a></li>
                                                 <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                                <li onClick={() => addItem(item)}><a href={item.id}><i className="fa fa-shopping-cart"></i></a></li>
+                                                <li onClick={() => addItem(item)}><Link to="/cart"><i className="fa fa-shopping-cart"></i></Link></li>
                                             </ul>
                                         </div>
                                         <div className="featured__item__text">

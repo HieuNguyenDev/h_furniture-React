@@ -50,27 +50,8 @@ export default function Shop() {
         setSearchQuerry(e.target.value)
     }
 
-    
-
-
     return (
         <>
-            {/* <section className="breadcrumb-section set-bg mt-168" style={{backgroundImage: "url('https://www.kayak.com/rimg/himg/32/95/fc/expediav2-56606-1add01-084924.jpg?width=1366&height=768&crop=true')"}} >
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-12 text-center">
-                            <div className="breadcrumb__text">
-                                <h2>Cửa hàng</h2>
-                                <div className="breadcrumb__option">
-                                    <a href="#" >Trang chủ</a>
-                                    <span>Cửa hàng</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section> */}
-
             <section className="product spad">
                 <div className="container">
                     <div className="row">
@@ -122,15 +103,6 @@ export default function Shop() {
                                     <div className="section-title">
                                         <h2>Tất cả sản phẩm</h2>
                                     </div>
-                                    {/* <div className="featured__controls">
-                                        <ul>
-                                            <li className="active" data-filter="*">Tất cả</li>
-                                            <li data-filter=".oranges">Oranges</li>
-                                            <li data-filter=".fresh-meat">Fresh Meat</li>
-                                            <li data-filter=".vegetables">Vegetables</li>
-                                            <li data-filter=".fastfood">Fastfood</li>
-                                        </ul>
-                                    </div> */}
                                 </div>
                             </div>
                             <div className='row'>
