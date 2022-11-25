@@ -10,9 +10,6 @@ import ProductDetail from '../pages/ProductDetail';
 import Register from '../pages/Register';
 import Shop from '../pages/Shop';
 
-// Test
-import Test from '../components/Test';
-
 // Public Routes
 export const publicRoutes = [
     { path: '*', component: NotFound },
@@ -28,8 +25,4 @@ export const publicRoutes = [
     { path: '/detail-product/:id', component: ProductDetail },
     { path: '/blog/:id', component: BlogDetail },
     { path: '/test', component: Test },
-]
-
-export const privateRoutes = [
-
 ]
